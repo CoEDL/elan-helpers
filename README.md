@@ -1,4 +1,4 @@
-# elan-helpers
+# Elan helpers
 
 Tools and scripts for working with ELAN. See the README file in each script folder for usage instuctions.
 
