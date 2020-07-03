@@ -1,8 +1,8 @@
-# Elan helpers
+# Elan Helpers
 
 Tools and scripts for working with ELAN. See the README file in each script folder for usage instuctions.
 
-## Elan character spacer
+## Elan Character Spacer
 
 This script will space-separate characters in all words in specified Elan tiers.
 
