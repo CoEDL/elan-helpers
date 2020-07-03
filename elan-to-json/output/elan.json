@@ -1,0 +1,37 @@
+[
+    {
+        "audio_file_name": "abui_1.wav",
+        "transcript": "amakaang di kaai hada muila",
+        "start_ms": 290,
+        "stop_ms": 1910,
+        "speaker_id": "SL"
+    },
+    {
+        "audio_file_name": "abui_2.wav",
+        "transcript": "dining ayoku kamar mia mui muila",
+        "start_ms": 890,
+        "stop_ms": 2960,
+        "speaker_id": "SL"
+    },
+    {
+        "audio_file_name": "abui_3.wav",
+        "transcript": "hekaai dining ayoku kamar mia muila",
+        "start_ms": 1850,
+        "stop_ms": 4140,
+        "speaker_id": "SL"
+    },
+    {
+        "audio_file_name": "abui_4.wav",
+        "transcript": "hekaai deina del ong hayei ba",
+        "start_ms": 660,
+        "stop_ms": 2570,
+        "speaker_id": "SL"
+    },
+    {
+        "audio_file_name": "abui_4.wav",
+        "transcript": "hepikaai deina botol homi dong yaari",
+        "start_ms": 3950,
+        "stop_ms": 6040,
+        "speaker_id": "SL"
+    }
+]

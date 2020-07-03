@@ -1,6 +1,6 @@
 # elan-helpers
-Tools and scripts for working with ELAN
+Tools and scripts for working with ELAN. See the README file in each script folder for usage instuctions.
 
+## Elan to JSON
+The script reads an Elan file (or a directory including Elan files) and exports a JSON file with the annotations on a selected tier. You can choose which tier by passing a tier name, tier type, or a tier order number as an argument to the script. Note that the tier selection has to be consistent across the data set.
 
-## Split Audio By Annotation
-The script reads the Elan files and slice audio based on annotations on the first tier. You can choose other tiers by passing a tier name, or a different order number as an argument to the script. Note that the tier name or number has to be consistent across the data set.
