@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences version="1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd">
+    <pref key="FrameSize">
+        <Object class="java.awt.Dimension">1280,697</Object>
+    </pref>
+    <pref key="LayoutManager.SelectedTabIndex">
+        <Int>7</Int>
+    </pref>
+    <pref key="LayoutManager.VisibleMultiTierViewer">
+        <String>mpi.eudico.client.annotator.viewer.TimeLineViewer</String>
+    </pref>
+    <pref key="TimeLineViewer.FontSize">
+        <Int>24</Int>
+    </pref>
+    <pref key="MultiTierViewer.ActiveTierName">
+        <String>Phrase</String>
+    </pref>
+    <pref key="SelectionEndTime">
+        <Long>1695</Long>
+    </pref>
+    <pref key="SignalViewer.ZoomLevel">
+        <Float>200.0</Float>
+    </pref>
+    <pref key="LayoutManager.CurrentMode">
+        <Int>1</Int>
+    </pref>
+    <prefGroup key="CommentViewer.Columns">
+        <pref key="Sender">
+            <Int>0</Int>
+        </pref>
+        <pref key="Comment">
+            <Int>75</Int>
+        </pref>
+        <pref key="Creation Date">
+            <Int>75</Int>
+        </pref>
+        <pref key="Tier">
+            <Int>75</Int>
+        </pref>
+        <pref key="Modification Date">
+            <Int>75</Int>
+        </pref>
+        <pref key="Recipient">
+            <Int>0</Int>
+        </pref>
+        <pref key="Start Time">
+            <Int>75</Int>
+        </pref>
+        <pref key="Initials">
+            <Int>75</Int>
+        </pref>
+        <pref key="End Time">
+            <Int>75</Int>
+        </pref>
+        <pref key="Thread">
+            <Int>75</Int>
+        </pref>
+    </prefGroup>
+    <prefGroup key="TierFonts"/>
+    <prefList key="CommentViewer.Columns.Order">
+        <String>Start Time</String>
+        <String>End Time</String>
+        <String>Tier</String>
+        <String>Initials</String>
+        <String>Comment</String>
+        <String>Thread</String>
+        <String>Sender</String>
+        <String>Recipient</String>
+        <String>Creation Date</String>
+        <String>Modification Date</String>
+    </prefList>
+    <pref key="ActiveRecognizerName">
+        <String>AAM-LR Phone level audio segmentation</String>
+    </pref>
+    <pref key="FrameLocation">
+        <Object class="java.awt.Point">342,23</Object>
+    </pref>
+    <pref key="TimeLineViewer.ZoomLevel">
+        <Float>200.0</Float>
+    </pref>
+    <pref key="SelectionBeginTime">
+        <Long>1695</Long>
+    </pref>
+    <prefGroup key="AAM-LR Phone level audio segmentation">
+        <pref key="base_url">
+            <String>http://lux17.mpi.nl/aamlr/</String>
+        </pref>
+        <pref key="source_audio">
+            <String>///Users/bbb/Desktop/abui-recordings/extra/1_1_3.wav</String>
+        </pref>
+    </prefGroup>
+    <pref key="TimeScaleBeginTime">
+        <Long>515</Long>
+    </pref>
+    <pref key="MediaTime">
+        <Long>1695</Long>
+    </pref>
+    <prefGroup key="TierColors">
+        <pref key="test">
+            <Object class="java.awt.Color">160,90,90</Object>
+        </pref>
+    </prefGroup>
+    <prefList key="MultiTierViewer.TierOrder">
+        <String>Phrase</String>
+        <String>test</String>
+    </prefList>
+    <prefGroup key="IndividualPlayerVolumes">
+        <pref key="1_1_3.wav">
+            <Float>0.06</Float>
+        </pref>
+    </prefGroup>
+    <prefGroup key="TierHighlightColors"/>
+    <pref key="LayoutManager.SplitPaneDividerLocation">
+        <Int>70</Int>
+    </pref>
+    <prefList key="CommentViewer.Columns.Hidden">
+        <String>Sender</String>
+        <String>Recipient</String>
+    </prefList>
+</preferences>
