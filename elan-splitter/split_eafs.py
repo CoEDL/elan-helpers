@@ -82,7 +82,12 @@ def write_text(annotation, fname):
 
 def write_json(annotations_data):
     with open(output_json, 'w') as outfile:
-        json.dump(annotations_data, outfile, indent=4, separators=(',', ': '), sort_keys=False)
+        json.dump(annotations_data, 
+                  outfile, 
+                  indent=4, 
+                  separators=(',', ': '), 
+                  sort_keys=False,
+                  ensure_ascii=False)
 
 
 def read_eaf(ie):
