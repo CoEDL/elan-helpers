@@ -49,9 +49,8 @@ def write_data_to_json_file(data: object = {}, output: Union[str, TextIOWrapper]
     json_data_string = json.dumps(data,
                                   indent=4,
                                   separators=(',', ': '),
-                                  sort_keys=False)
-    
-    print(output)
+                                  sort_keys=False,
+                                  ensure_ascii=False)
 
     if isinstance(output, str):
         with open(output, "w") as file:
@@ -168,7 +167,6 @@ def process_eaf(input_elan_file: str = '',
         start: str = annotation[0]
         end: str = annotation[1]
         annotation_text: str = annotation[2]
-
         print(f"annotation {annotation} {start} {end}")
         obj = {
             "audio_file_name": f"{file_name}.wav",

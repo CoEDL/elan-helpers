@@ -18,7 +18,7 @@
     <TIER LINGUISTIC_TYPE_REF="default-lt" PARTICIPANT="SL" TIER_ID="Phrase">
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1" TIME_SLOT_REF1="ts2" TIME_SLOT_REF2="ts7">
-                <ANNOTATION_VALUE>amakaang di kaai hada muila</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>amakaang 你好 di kaai hada muila</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
     </TIER>
