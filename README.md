@@ -15,3 +15,7 @@ The script reads an Elan file (or a directory including Elan files) and exports 
 ## Elan Splitter
 
 The script processes a directory of audio annotated in Elan, and outputs audio clips and matching-named text files containing the respective annotations. The original files are not altered. Audio clips are determined by the start and end times of annotations on the first tier. You can choose to use another tier by passing a tier name or a different order number (not tier type) as an argument to the script.
+
+## Python Tier Selector
+
+This script doesn't do much on its own, but can be used as a basis for your own processing script. It looks in a folder the user specifies, and compiles a list of all the tiers in the Elan files in that folder. The script offers the user an option to select one or more tiers from the list. From this point you could extend the script to extract all the annotations on the selected tiers, or perhaps write a new Elan file that combines the selected tiers.
