@@ -2,24 +2,25 @@ from PyInquirer import prompt
 import glob
 import os
 from pympi.Elan import Eaf
+from typing import Set
 
 
-# Return all files from a directory, that have matching extension
-def find_files_by_ext(setOfAllFiles, exts):
+# Return all files that have matching extension, from a specified directory
+def find_files_by_ext(all_files: Set[str], extensions: Set[str]):
     files = []
-    for file in setOfAllFiles:
+    for file in all_files:
         name, ext = os.path.splitext(file)
-        if ("*" + ext.lower()) in exts:
+        if ("*" + ext.lower()) in extensions:
             files.append(file)
     return files
 
 
 # Prompt user to select multiple tier names from a list of options
-def select_tier(tier_names):
+def select_tier(tier_names: Set[str]):
+    print(type(tier_names))
     tier_names_checkboxes = []
     for tier_name in list(tier_names):
         tier_names_checkboxes.append({'name': tier_name})
-
     questions = [
         {
             'type': 'checkbox',
@@ -49,18 +50,19 @@ def main():
     input_dir_prompt = prompt(input_dir_question)
     input_dir = input_dir_prompt["input_dir"]
     # Get all files from the input directory
-    extensions = ["*.eaf"]
+    extensions = set(["*.eaf"])
     tier_names = set()
     all_files = set(glob.glob(os.path.join(input_dir, "**"), recursive=True))
-    input_eafs = find_files_by_ext(all_files, set(extensions))
+    input_files = find_files_by_ext(all_files, extensions)
     # Compile tier info for the files in the input dir
-    for input_eaf_path in input_eafs:
-        input_eaf = Eaf(input_eaf_path)
+    for input_file_path in input_files:
+        input_file = Eaf(input_file_path)
         # Get the tier names — using pympi-ling
-        file_tier_names = list(input_eaf.get_tier_names())
+        file_tier_names = list(input_file.get_tier_names())
         # Compile tiers into set to use for user prompt
         for tier_name in file_tier_names:
             tier_names.add(tier_name)
+    print(type(tier_names))
     select_tier(tier_names)
 
 
