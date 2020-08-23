@@ -19,3 +19,8 @@ The script processes a directory of audio annotated in Elan, and outputs audio c
 ## Python Tier Selector
 
 This script doesn't do much on its own, but can be used as a basis for your own processing script. It looks in a folder the user specifies, and compiles a list of all the tiers in the Elan files in that folder. The script offers the user an option to select one or more tiers from the list. From this point you could extend the script to extract all the annotations on the selected tiers, or perhaps write a new Elan file that combines the selected tiers.
+
+
+## Make ELANs from WAVs
+
+Processing scripts to generate Elan files for a nested folders of WAVs, using the WAV file names as the annotation values. Perfect for converting a directory of audio files to Elpis-ready format.

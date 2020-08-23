@@ -1,0 +1,8 @@
+venv
+.idea
+.DS_Store
+flac/*
+wav/*
+!flac/.gitkeep
+!wav/.gitkeep
+
