@@ -6,6 +6,6 @@ Processing scripts to generate Elan files matching a nested folders of WAVs. The
 ## Requirements
 
 ```
-pip install librosa num2words pympi-ling excel2json-3
+pip install librosa num2words pympi-ling pandas
 
 ```
