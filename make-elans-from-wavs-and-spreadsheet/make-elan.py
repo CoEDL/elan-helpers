@@ -1,71 +1,91 @@
+#!/usr/bin/python
 import os
 import librosa
-import re
-import num2words
 from pympi.Elan import Eaf
 import argparse
 import pandas
 import json
-# import excel2json
 
 
-def prepare_input_file(spreadsheet):
+def get_annotations(spreadsheet):
+    """
+    Get filenames and annotations from a spreadsheet (actually loads all spreadsheet columns)
+    :param spreadsheet: Name of the spreadsheet which contains rows of audio filenames and annotations
+    :return: JSON format list of objects. Each object corresponds to a row of data in the excel file
+    """
     spreadsheet_data = pandas.read_excel(spreadsheet)
-    spreadsheet_not_really_json = spreadsheet_data.to_json(orient='records')
-    # excel2json generates a JSON file. Maybe handy instead of pandas?
-    # spreadsheet_data = excel2json.convert_from_file(spreadsheet)
-    return json.loads(spreadsheet_not_really_json)
+    spreadsheet_json = spreadsheet_data.to_json(orient='records')
+    annotations = json.loads(spreadsheet_json)
+    print('Spreadsheet loaded')
+    return annotations
 
 
-def get_annotation_from_spreadsheet(spreadsheet_json, filename):
+def get_annotation(annotations, filename):
+    """
+    Get annotation for an audio file by looking up filename match in the spreadsheet json
+    :param annotations: data from input spreadsheet in JSON format
+    :param filename: name of WAV file to get annotation for
+    :return: annotation retrieved from the spreadsheet data matching the WAV filename
+    """
     annotation = ''
-    for record in spreadsheet_json:
+    for record in annotations:
         if record["File name"] == filename:
             annotation = record["Transcription"]
             break
     return annotation
 
 
-def main():
+def make_elans(spreadsheet, source, target):
     """
-    Make elan files based on filenames of wav files
+    Make ELAN files based on filenames of WAV files
+    :param spreadsheet: Path and file name of the spreadsheet containing WAV filenames and matching annotations
+    :param source: Directory name of folder containing WAV audio files
+    :param  target: Directory name to save EAF files into
     """
-    parser = argparse.ArgumentParser(description='make .eaf to match .wav and spreadsheet with transcriptions')
-    parser.add_argument('-a', '--annotations', help='spreadsheet name', default=os.path.join('input', 'test.xlsx'))
-    parser.add_argument('-s', '--source', help='folder of wavs', default='wav')
-    parser.add_argument('-t', '--target', help='folder to save eafs', default='eaf')
-    args = parser.parse_args()
 
     # Read spreadsheet data and convert to JSON format
-    spreadsheet_json = prepare_input_file(args.annotations)
-
-    # Set paths for input and output
-    source_path = args.source
-    target_path = args.target
+    print('Loading spreadsheet')
+    annotations = get_annotations(spreadsheet)
 
     # Process each file
-    for _, _, filenames in os.walk(source_path):
+    print('Processing WAVs')
+    for _, _, filenames in os.walk(source):
 
         for filename in filenames:
             if '.wav' in filename:
                 basename, ext = os.path.splitext(os.path.basename(filename))
 
-                # Audio file duration - use this as end time slot
-                duration = int(librosa.get_duration(filename=os.path.join(source_path, filename))*1000)
+                # Get audio file duration - use this as the EAF annotation's end timeslot
+                duration = int(librosa.get_duration(filename=os.path.join(source, filename))*1000)
 
-                # Make file annotation from filename (minus the suffix)
-                annotation = get_annotation_from_spreadsheet(spreadsheet_json, filename)
+                # Get annotation from the source data matching on filename
+                annotation = get_annotation(annotations, filename)
 
-                # text = re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), annotation)
+                # Add any annotation cleaning here
+                # annotation = re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), annotation)
 
                 print(filename, duration, annotation)
 
-                # Make elan
+                # Make EAF file
                 output_eaf = Eaf()
                 output_eaf.add_tier('tx')
                 output_eaf.insert_annotation('tx', 0, duration, annotation)
-                output_eaf.add_linked_file(os.path.join(target_path, f'{basename}.wav'))
-                output_eaf.to_file(os.path.join(target_path, f'{basename}.eaf'))
+                output_eaf.add_linked_file(os.path.join(target, f'{basename}.wav'))
+                output_eaf.to_file(os.path.join(target, f'{basename}.eaf'))
+    print('>>> Done')
+
+
+def main():
+    parser = argparse.ArgumentParser(description='make ELAN files to match WAVs')
+    parser.add_argument('-a', '--annotations', help='spreadsheet name', default=os.path.join('input', 'test.xlsx'))
+    parser.add_argument('-s', '--source', help='folder of WAVs', default='wav')
+    parser.add_argument('-t', '--target', help='folder to save EAFs', default='eaf')
+    args = parser.parse_args()
+
+    spreadsheet = args.annotations
+    source = args.source
+    target = args.target
+    make_elans(spreadsheet, source, target)
 
 
 if __name__ == "__main__":
