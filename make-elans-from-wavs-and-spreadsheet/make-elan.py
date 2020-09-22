@@ -2,12 +2,13 @@
 import os
 import librosa
 from pympi.Elan import Eaf
+from typing import List, Dict
 import argparse
 import pandas
 import json
 
 
-def get_annotations(spreadsheet):
+def get_annotations(spreadsheet: str):
     """
     Get filenames and annotations from a spreadsheet (actually loads all spreadsheet columns)
     :param spreadsheet: Name of the spreadsheet which contains rows of audio filenames and annotations
@@ -20,7 +21,7 @@ def get_annotations(spreadsheet):
     return annotations
 
 
-def get_annotation(annotations, filename):
+def get_annotation(annotations: List[Dict[str, str]], filename: str):
     """
     Get annotation for an audio file by looking up filename match in the spreadsheet json
     :param annotations: data from input spreadsheet in JSON format
@@ -35,7 +36,7 @@ def get_annotation(annotations, filename):
     return annotation
 
 
-def make_elans(spreadsheet, source, target):
+def make_elans(spreadsheet: str, source: str, target: str):
     """
     Make ELAN files based on filenames of WAV files
     :param spreadsheet: Path and file name of the spreadsheet containing WAV filenames and matching annotations
@@ -44,7 +45,7 @@ def make_elans(spreadsheet, source, target):
     """
 
     # Read spreadsheet data and convert to JSON format
-    print('Loading spreadsheet')
+    print('Loading data from spreadsheet')
     annotations = get_annotations(spreadsheet)
 
     # Process each file
