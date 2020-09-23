@@ -6,5 +6,6 @@ wav/*
 eaf/*
 !flac/.gitkeep
 !wav/.gitkeep
+!eaf/.gitkeep
 input/~*
 
