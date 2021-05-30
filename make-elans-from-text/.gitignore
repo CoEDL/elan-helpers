@@ -5,6 +5,7 @@
 venv
 __pycache__
 .idea
+all
 # Source and target data dirs
 input/*
 !input/.gitkeep

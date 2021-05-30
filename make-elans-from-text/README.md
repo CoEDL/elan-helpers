@@ -4,6 +4,11 @@ Annotation start-time is 0 and end-time is duration of audio.
 
 
 ```shell
-pip install librosa pympi-ling
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 python convert.py
 ```
+
+
+Use optional `--copy_wavs` setting to copy WAV files into the out dir
