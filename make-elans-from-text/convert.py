@@ -48,8 +48,8 @@ def make_elans(input_dir: str, output_dir: str, copy_wavs: bool):
 
                 # Make EAF file
                 output_eaf = Eaf()
-                output_eaf.add_tier('tx')
-                output_eaf.insert_annotation('tx', 0, duration, annotation)
+                # output_eaf.add_tier('default')
+                output_eaf.insert_annotation('default', 0, duration, annotation)
                 output_eaf.add_linked_file(os.path.join(output_dir, f'{basename}.wav'))
                 output_eaf.to_file(os.path.join(output_dir, f'{basename}.eaf'))
 
