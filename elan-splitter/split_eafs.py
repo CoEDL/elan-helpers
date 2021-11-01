@@ -26,7 +26,8 @@ from slugify import slugify
 parser = argparse.ArgumentParser(description="This script will slice audio and output text based on ELAN annotations.")
 parser.add_argument('-i', '--input_dir', help='Directory of audio and eaf files', type=str, default='./input')
 parser.add_argument('-o', '--tier_order', help='Get the annotations from this tier index, eg top tier would be 1', type=int, default='1')
-parser.add_argument('-t', '--tier', help='Target language tier name', type=str, default='default')
+parser.add_argument('-t', '--slice_tier', help='Tier name to use for slicing start end times', type=str, default='default')
+parser.add_argument('-w', '--text_tier', help='Tier name to use for annotation text', type=str, default='default')
 parser.add_argument('-m', '--silence_marker', help='Skip any annotations on the target language tier with this value', type=str, default='*PUB')
 parser.add_argument('-s', '--silence_tier', help='Silence audio when annotations are found on this ref tier', type=str, default='Silence')
 parser.add_argument('-a', '--output_audio_dir', help='Directory to save the audio files', type=str, default='./output')
@@ -40,7 +41,8 @@ args = parser.parse_args()
 try:
     input_dir = args.input_dir
     tier_order = args.tier_order
-    tier = args.tier
+    slice_tier = args.slice_tier
+    text_tier = args.text_tier
     silence_marker = args.silence_marker
     silence_tier = args.silence_tier
     output_audio_dir = args.output_audio_dir
@@ -66,7 +68,7 @@ if not os.path.exists(output_label_dir):
 
 if verbose:
     print("tier_order", tier_order)
-    print("tier", tier)
+    print("slice_tier", slice_tier)
 
 
 def split_audio_by_start_end(input_audio, start, end, fname):
@@ -102,23 +104,24 @@ def read_eaf(ie):
     if verbose:
         print("tier_names", tier_names, file=sys.stderr)
 
-    # Are we working by tier name or order?
-    if tier != "default" :
+    # Are we working by slice_tier name or order?
+    if slice_tier != "default" :
         if verbose:
-            print("using tier by name:", tier, file=sys.stderr)
+            print("using slice_tier by name:", slice_tier, file=sys.stderr)
     else:
 
-        # Sanity check that the tier num is not greater than the num of tiers
+        # Sanity check that the slice_tier num is not greater than the num of tiers
         if tier_order > len(tier_names):
             print("Error: tier number is greater than the number of tiers",
                   file=sys.stderr)
             return False
         if verbose:
-            print("using tier by number:", tier_names[tier_order-1], file=sys.stderr)
+            print("using slice_tier by number:", tier_names[tier_order-1], file=sys.stderr)
 
-    if tier not in tier_names:
-        print('Error: missing tier ' + tier, file=sys.stderr)
+    if slice_tier not in tier_names:
+        print('Error: missing slice_tier ' + slice_tier, file=sys.stderr)
         return False
+
     if silence_tier not in tier_names:
         if verbose:
             print('silence tier not found: ' + silence_tier, file=sys.stderr)
@@ -126,6 +129,7 @@ def read_eaf(ie):
     # get the input audio file
     inDir, name = os.path.split(ie)
     basename, ext = os.path.splitext(name)
+
     # we can write out mp3 or whatever, still require wav input
     ia = os.path.join(inDir, basename + ".wav")
     input_audio = AudioSegment.from_wav(ia)
@@ -138,8 +142,13 @@ def read_eaf(ie):
             check_silence_ref_tier = True
 
     # Get annotation values, start and end times, and speaker id
-    annotations = sorted(input_eaf.get_annotation_data_for_tier(tier))
-    params = input_eaf.get_parameters_for_tier(tier)
+    if text_tier not in tier_names:
+        print('Error: missing text tier')
+        return False
+
+    annotations = sorted(input_eaf.get_annotation_data_for_tier(text_tier))
+
+    params = input_eaf.get_parameters_for_tier(text_tier)
     if 'PARTICIPANT' in params:
         speaker_id = params['PARTICIPANT']
 
