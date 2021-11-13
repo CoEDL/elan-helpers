@@ -25,6 +25,14 @@ def make_elans(input_dir: str, output_dir: str, copy_wavs: bool):
         basename = os.path.splitext(os.path.basename(filepath))[0]
         subdirname = os.path.basename(os.path.dirname(filepath))
 
+        sex = subdirname[0]
+        participant = subdirname[1:]
+
+        # SEX :== m | f
+        # SPEAKER_ID :== <INITIALS><DIGIT>
+        # INITIALS :== speaker initials, 3 letters
+        # DIGIT :== number 0-9 to differentiate speakers with identical initials
+
         # print(filename)     # input/dr1/fmem0/sa2.txt
         # print(filepath)     # input/dr1/fmem0/sa2
         # print(subdirname)   # fmem0
@@ -51,7 +59,7 @@ def make_elans(input_dir: str, output_dir: str, copy_wavs: bool):
 
         # Make EAF file
         output_eaf = Eaf()
-        output_eaf.add_tier('default')
+        output_eaf.add_tier('default', part=participant)
         output_eaf.add_annotation('default', start, duration, annotation_text)
         output_eaf.add_linked_file(os.path.join(output_dir, f'{subdirname}-{basename}.wav'))
         output_eaf.to_file(os.path.join(output_dir, f'{subdirname}-{basename}.eaf'))
@@ -59,6 +67,7 @@ def make_elans(input_dir: str, output_dir: str, copy_wavs: bool):
         # Copy WAV?
         # if copy_wavs:
         shutil.copyfile(f'{filepath}.wav', os.path.join(output_dir, f'{subdirname}-{basename}.wav'))
+
     print('>>> Done')
 
 
