@@ -23,7 +23,7 @@ It has been written for the JSON output from Huggingface ASR pipelines. Here's a
             1.56,
             1.7
         ]
-    }.
+    }
 ]
 ```
 
