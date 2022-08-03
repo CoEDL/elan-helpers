@@ -16,6 +16,9 @@ The script reads an Elan file (or a directory including Elan files) and exports 
 
 The script processes a directory of audio annotated in Elan, and outputs audio clips and matching-named text files containing the respective annotations. The original files are not altered. Audio clips are determined by the start and end times of annotations on the first tier. You can choose to use another tier by passing a tier name or a different order number (not tier type) as an argument to the script.
 
+## JSON to ELAN
+
+This script will process a folder of JSON files containing annotations, and build ELAN files for each.
 
 ## Python Tier Selector
 

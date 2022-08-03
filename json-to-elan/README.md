@@ -2,6 +2,31 @@
 
 The script reads a JSON file (or folder) and generates an ELAN file to match.
 
+## JSON format
+
+It has been written for the JSON output from Huggingface ASR pipelines. Here's an example of the expected JSON format. 
+
+```json
+[
+    {
+        "text": "luanghan",
+        "timestamp":
+        [
+            1.16,
+            1.48
+        ]
+    },
+    {
+        "text": "ian",
+        "timestamp":
+        [
+            1.56,
+            1.7
+        ]
+    }.
+]
+```
+
 ## Setup 
 
 Create a virtual environment and install the required packages.
