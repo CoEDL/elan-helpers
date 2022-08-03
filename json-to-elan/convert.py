@@ -37,7 +37,7 @@ def make_elans(tier_name: str, input_dir: str, output_dir: str, copy_wavs: bool)
                     print(end, start)
                     output_eaf.add_annotation("default", start, end, value=annotation["text"])
 
-                if tier_name is not "default":
+                if tier_name != "default":
                     output_eaf.rename_tier("default", tier_name)
                 output_eaf.add_linked_file(str(Path(output_dir, f'{basename}.wav')))
                 output_eaf.to_file(str(Path(output_dir, f'{basename}.eaf')))
