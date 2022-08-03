@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ```
 
 
-Put your JSON files in the `input` directory, then run the script. The script will build an ELAN file with the annotations from the JSON file. It expects that your WAV files are named the same as the JSON basename (eg, if your JSON file is named `audio_1.json`, the ELAN file will end up with a linked media added for `audio_1.wav`). 
+Put your JSON files in the `input` directory, then run the script. The script will build an ELAN files for each JSON file, using that JSON file's annotation data. It expects that your WAV files are named the same as the JSON basename (eg, if your JSON file is named `audio_1.json`, the ELAN file will end up with a linked media added for `audio_1.wav`). To open the ELAN file you will need to copy your audio into the output dir. Note that the output dir is erased each time the script it run, so be sure to keep a copy of the audio. 
 ```
 python convert.py
 ```
