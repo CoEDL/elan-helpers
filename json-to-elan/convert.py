@@ -11,8 +11,8 @@ def make_elans(tier_name: str, input_dir: str, output_dir: str, copy_wavs: bool)
     """
     Make ELAN files based on JSON data
     :param tier_name: The name of the tier to write into
-    :param input_dir: Directory name of folder containing TXT and WAV audio files
-    :param  output_dir: Directory name to save EAF files into
+    :param input_dir: Directory name of folder containing JSON (and optionally also matching WAV audio) files
+    :param output_dir: Directory name to save EAF files into
     :param copy_wavs: Setting whether or not to copy the WAV file to the output dir
     """
     # Process each file
